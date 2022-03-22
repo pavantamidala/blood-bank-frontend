@@ -14,7 +14,7 @@ import {
 } from "../shared/constants";
 import { getCheckedValues, getObjFromKey, getSelectedFiltersArr } from "../shared/CommonMethods";
 import axios from "axios";
-export default function BasicMenu({ filterObj, filtersData, setFiltersData }) {
+export default function BasicMenu({ filterObj, filtersData, setFiltersData ,setMapsData}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -22,7 +22,8 @@ export default function BasicMenu({ filterObj, filtersData, setFiltersData }) {
     setAnchorEl(event.currentTarget);
   };
   const success = (res) => {
-    console.log(res);
+    setMapsData(res['data'])
+    console.log(res['data']);
   };
   const failure = (err) => {
     console.log(err);

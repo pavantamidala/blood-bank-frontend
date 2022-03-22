@@ -1,7 +1,7 @@
 import React from "react";
 import BasicMenu from "./CustomMenu";
 import "../styles/Filters.css";
-function Filters({ filtersData, setFiltersData }) {
+function Filters({ filtersData, setFiltersData ,setMapsData}) {
   return (
     <div className="filters-container">
       {filtersData.map((obj, i) => {
@@ -11,6 +11,7 @@ function Filters({ filtersData, setFiltersData }) {
             setFiltersData={setFiltersData}
             filtersData={filtersData}
             filterObj={obj}
+            setMapsData={setMapsData}
           />
         );
       })}

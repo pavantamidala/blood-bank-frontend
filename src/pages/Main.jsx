@@ -14,7 +14,7 @@ import axios from "axios";
 function Main() {
   const [filtersData, setFiltersData] = useState(BASE_DATA.FILTERS_DATA);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [mapsData,setMapsData] = useState([])
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -71,10 +71,10 @@ function Main() {
       >
         {isModalVisible && <Profile />}
       </Modal>
-      <Filters filtersData={filtersData} setFiltersData={setFiltersData} />
+      <Filters setMapsData={setMapsData} filtersData={filtersData} setFiltersData={setFiltersData} />
       {/* {!isModalVisible && <Map />} */}
       {/* <Map /> */}
-<MapEx/>
+<MapEx mapsData={mapsData} />
       {/* <CustomMenu /> */}
       {/* <BasicMenu /> */}
       {/* <Autocomplete

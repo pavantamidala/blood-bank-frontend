@@ -1,17 +1,16 @@
 import React from 'react'
-import { GoogleMap, useJsApiLoader ,Autocomplete} from '@react-google-maps/api';
-
+import { GoogleMap, useJsApiLoader ,Autocomplete,Marker} from '@react-google-maps/api';
+import '../styles/map.css'
 const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
+    width: "80vw",
+    height: "60vh",
+  };
+  const center = {
+    lat: -3.745,
+    lng: -38.523,
+  };
 
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
-
-function MapEx() {
+function MapEx({mapsData}) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -44,11 +43,17 @@ function MapEx() {
     //   console.log('Autocomplete is not loaded yet!')
     // }
   }
-  return isLoaded ? (
+  const position = {
+    lat: 37.772,
+    lng: -122.214
+  }
+  return <div className='mapWrapper' >
+{
+    isLoaded ? (
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={2}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
@@ -78,8 +83,20 @@ function MapEx() {
               }}
             />
           </Autocomplete> */}
+          {
+            mapsData.map((obj,i)=>{
+                return <Marker key={i} position={{lat:obj.address.lat,lng:obj.address.lng}} />
+            })
+          }
+          {/* <Marker
+    //   onLoad={onLoad}
+      position={position}
+    /> */}
       </GoogleMap>
   ) : <></>
+}
+  </div>
+
 }
 
 export default React.memo(MapEx)
