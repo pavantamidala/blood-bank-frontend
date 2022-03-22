@@ -24,11 +24,12 @@ export const BASE_DATA = {
       filters: [],
       selectedFilters: [],
     },
-    {
-      name: AGE_GROUP,
-      filters: [],
-      selectedFilters: [],
-    },
+    // {
+    //   name: AGE_GROUP,
+    //   filters: [],
+    //   selectedFilters: [],
+    //   // display:true
+    // },
     {
       name: GENDER,
       filters: [],

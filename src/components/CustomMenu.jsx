@@ -12,9 +12,18 @@ import {
   GENDER,
   LOCATION,
 } from "../shared/constants";
-import { getCheckedValues, getObjFromKey, getSelectedFiltersArr } from "../shared/CommonMethods";
+import {
+  getCheckedValues,
+  getObjFromKey,
+  getSelectedFiltersArr,
+} from "../shared/CommonMethods";
 import axios from "axios";
-export default function BasicMenu({ filterObj, filtersData, setFiltersData ,setMapsData}) {
+export default function BasicMenu({
+  filterObj,
+  filtersData,
+  setFiltersData,
+  setMapsData,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -22,8 +31,8 @@ export default function BasicMenu({ filterObj, filtersData, setFiltersData ,setM
     setAnchorEl(event.currentTarget);
   };
   const success = (res) => {
-    setMapsData(res['data'])
-    console.log(res['data']);
+    setMapsData(res["data"]);
+    console.log(res["data"]);
   };
   const failure = (err) => {
     console.log(err);
@@ -31,17 +40,17 @@ export default function BasicMenu({ filterObj, filtersData, setFiltersData ,setM
 
   const handleClose = () => {
     setAnchorEl(null);
-    applyFilters()
-    console.log(filtersData)
+    applyFilters();
+    console.log(filtersData);
     getMapData(filtersData, success, failure);
   };
- function  applyFilters(){
-  let arr = filtersData.map((obj)=>{
-     obj.selectedFilters = getCheckedValues(obj.filters)
-     return obj 
-   })
-   setFiltersData(arr)
- }
+  function applyFilters() {
+    let arr = filtersData.map((obj) => {
+      obj.selectedFilters = getCheckedValues(obj.filters);
+      return obj;
+    });
+    setFiltersData(arr);
+  }
 
   function handleChange(e, val, o) {
     let index;
@@ -74,6 +83,8 @@ export default function BasicMenu({ filterObj, filtersData, setFiltersData ,setM
     }
     return value;
   }
+  let val = filterObj.display;
+  console.log(filterObj)
   return (
     <div>
       <Button
@@ -82,6 +93,7 @@ export default function BasicMenu({ filterObj, filtersData, setFiltersData ,setM
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+
       >
         {filterObj.name}
       </Button>
@@ -123,7 +135,7 @@ const getMapData = (data, success, failure) => {
     gender: getSelectedFiltersArr(getObjFromKey(GENDER, data)),
     // address:{formatted_address:'nellore'},
     formatted_address: getSelectedFiltersArr(getObjFromKey("Location", data)),
-    ageGroup: getSelectedFiltersArr(getObjFromKey(AGE_GROUP, data)),
+    // ageGroup: getSelectedFiltersArr(getObjFromKey(AGE_GROUP, data)),
   };
   let req = {
     method: "PUT",
@@ -131,7 +143,7 @@ const getMapData = (data, success, failure) => {
     headers: {
       "Content-Type": "application/json",
     },
-    data: JSON.stringify({payload:payload}),
+    data: JSON.stringify({ payload: payload }),
   };
-  axios.put('/get-base-data',req).then(success).catch(failure);
+  axios.put("/get-base-data", req).then(success).catch(failure);
 };

@@ -217,6 +217,7 @@ function Profile() {
           <Autocomplete
             apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
             onPlaceSelected={(place) => {
+              console.log(place)
               setAddress((val) => {
                 return {
                   formatted_address: place.formatted_address,
