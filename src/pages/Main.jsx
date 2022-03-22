@@ -7,6 +7,7 @@ import { checkAndAddDifference, createObjWithChecked } from "../shared/CommonMet
 import { BASE_DATA } from "../shared/dataStore/config";
 import queryString from "query-string";
 import Profile from "./Profile";
+import MapEx from '../maps/ex1'
 import { Modal, Button } from "antd";
 import axios from "axios";
 // import {MyMapWithAutocomplete} from "../components/autocomplete";
@@ -72,8 +73,8 @@ function Main() {
       </Modal>
       <Filters filtersData={filtersData} setFiltersData={setFiltersData} />
       {/* {!isModalVisible && <Map />} */}
-      <Map />
-
+      {/* <Map /> */}
+<MapEx/>
       {/* <CustomMenu /> */}
       {/* <BasicMenu /> */}
       {/* <Autocomplete

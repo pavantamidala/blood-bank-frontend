@@ -214,7 +214,7 @@ function Profile() {
         </div>
         <div className="blood-form">
           <Form.Field> Address : </Form.Field>
-          {/* <Autocomplete
+          <Autocomplete
             apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
             onPlaceSelected={(place) => {
               setAddress((val) => {
@@ -226,7 +226,7 @@ function Profile() {
                 };
               });
             }}
-          /> */}
+          />
         </div>
         <div className="blood-form">
           <Form.Field> Date of Birth : </Form.Field>{" "}
