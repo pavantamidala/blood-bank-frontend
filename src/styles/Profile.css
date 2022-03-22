@@ -1,0 +1,72 @@
+.profileContainer {
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+  display: grid;
+  grid-row-gap: 20px;
+}
+.profileHeading {
+  display: flex;
+}
+.profileInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  grid-row-gap: 30px;
+  grid-column-gap: 80px;
+}
+.bloodGroup {
+}
+.bloodCells {
+}
+.bloodDonated {
+}
+.gender {
+}
+.address {
+}
+.dob {
+}
+.blood-cell-wrapper {
+  justify-self: flex-start;
+}
+.blood-cell-form {
+  /* display: grid;
+  grid-template-columns: 2fr 1fr; */
+}
+.bloodcell-label {
+  justify-self: flex-end;
+  align-self: center;
+  margin: 0px !important;
+  margin-right: 10px !important;
+}
+.blood-wrapper {
+  display: flex;
+  justify-self: flex-start;
+}
+.blood-form {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center; */
+  display: flex;
+}
+.field {
+  justify-self: flex-end;
+  align-self: center;
+  margin: 0px !important;
+  margin-right: 10px !important;
+  white-space: nowrap;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  justify-self: center;
+}
+input {
+  min-width: 280px;
+}
+
+.ant-modal-body {
+  margin-top: -35px;
+}
