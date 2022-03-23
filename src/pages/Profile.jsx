@@ -25,7 +25,7 @@ let friendOptions = [
     // },
   },
 ];
-function Profile() {
+function Profile({handleCancel}) {
   const [donatedBloodCelss, setDonatedBloodCells] = useState(null);
   const [donatedBlood, setDonatedBlood] = useState(null);
   const [gender, setgenderChange] = useState(null);
@@ -99,9 +99,11 @@ function Profile() {
       .put("/user-details", req)
       .then((res) => {
         console.log(res);
+        handleCancel()
       })
       .catch((err) => {
         console.log(err);
+        handleCancel()
       });
 
     console.log(payload);

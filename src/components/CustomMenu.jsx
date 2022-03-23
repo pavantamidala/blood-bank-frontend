@@ -37,7 +37,10 @@ export default function BasicMenu({
   const failure = (err) => {
     console.log(err);
   };
-
+// React.useEffect(() => {
+//   getMapData(filtersData, success, failure);
+ 
+// }, []);
   const handleClose = () => {
     setAnchorEl(null);
     applyFilters();
@@ -73,13 +76,17 @@ export default function BasicMenu({
     ans.splice(index, 0, ob);
     setFiltersData([...ans]);
   }
-  function getMapper(value) {
+  const memoizedMapper = React.useCallback(getMapper,[])
+  function getMapper(value,filterName) {
     console.log("fileter");
     if (value === true) {
       return "Yes";
     }
     if (value === false) {
       return "No";
+    }
+    if(filterName===LOCATION){
+      return value.split(',')[0]
     }
     return value;
   }
@@ -110,7 +117,7 @@ export default function BasicMenu({
           return (
             <MenuItem key={i}>
               <div className="custom-box">
-                <span> {getMapper(obj.name)} </span>
+                <span> {memoizedMapper(obj.name,filterObj.name)} </span>
                 <Checkbox
                   checked={obj.checked}
                   onChange={(e) => handleChange(e, filterObj, obj)}

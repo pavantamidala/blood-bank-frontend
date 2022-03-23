@@ -53,7 +53,7 @@ function MapEx({mapsData}) {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={2}
+        zoom={1}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >

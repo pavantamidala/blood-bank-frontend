@@ -9,6 +9,9 @@ import queryString from "query-string";
 import Profile from "./Profile";
 import MapEx from '../maps/ex1'
 import { Modal, Button } from "antd";
+import { Avatar, Image } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import '../styles/Main.css'
 import axios from "axios";
 // import {MyMapWithAutocomplete} from "../components/autocomplete";
 function Main() {
@@ -56,11 +59,17 @@ function Main() {
   }, []);
 
   return (
-    <div>
+    <div className="overallWrapper" >
       {/* <Profile /> */}
-      <Button type="primary" onClick={showModal}>
+      <div className="heading">
+    <h3 className="title">
+      Blood Bank 
+    </h3>
+      <Avatar className="avatar" onClick={showModal} style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+      </div>
+      {/* <Button type="primary" >
         Profile
-      </Button>
+      </Button> */}
       <Modal
         width={"1100px"}
         title="Edit Profile"
@@ -69,7 +78,7 @@ function Main() {
         onCancel={handleCancel}
         footer={null}
       >
-        {isModalVisible && <Profile />}
+        {isModalVisible && <Profile handleCancel={handleCancel} />}
       </Modal>
       <Filters setMapsData={setMapsData} filtersData={filtersData} setFiltersData={setFiltersData} />
       {/* {!isModalVisible && <Map />} */}
