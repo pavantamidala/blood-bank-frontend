@@ -18,6 +18,7 @@ function Main() {
   const [filtersData, setFiltersData] = useState(BASE_DATA.FILTERS_DATA);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [mapsData,setMapsData] = useState([])
+  
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -83,7 +84,8 @@ function Main() {
       <Filters setMapsData={setMapsData} filtersData={filtersData} setFiltersData={setFiltersData} />
       {/* {!isModalVisible && <Map />} */}
       {/* <Map /> */}
-<MapEx mapsData={mapsData} />
+<MapEx setMapsData={setMapsData} mapsData={mapsData} />
+{/* <img src="https://lh3.googleusercontent.com/a/AATXAJzrUeKlYL-M91GlSndYVzPx7CpK4Nh5ejr2xKZquw=s96-c" alt="" /> */}
       {/* <CustomMenu /> */}
       {/* <BasicMenu /> */}
       {/* <Autocomplete
@@ -105,3 +107,50 @@ function Main() {
 }
 
 export default Main;
+
+
+// userName
+// :
+// "pavan"
+// displayName
+// :
+// "pavan k"
+// googleId
+// :
+// "109824105737018270268"
+// email
+// :
+// "pavantamidala023@gmail.com"
+// emailVerified
+// :
+// true
+
+// profilePicture
+// :
+// "https://lh3.googleusercontent.com/a/AATXAJzrUeKlYL-M91GlSndYVzPx7CpK4Nh5ejr2xKZquw=s96-c"
+// __v
+// :
+// 0
+
+// address
+// :
+// {formatted_address: "Hyderabad, Telangana, India", …}
+// bloodGroup
+// :
+// "A−"
+// dob
+// :
+// "2022-03-16"
+// donatedBlood
+// :
+// true
+
+// donatedBloodCelss
+// :
+// false
+
+// formatted_address
+// :
+// "Hyderabad, Telangana, India"
+// gender
+// :

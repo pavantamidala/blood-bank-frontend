@@ -1,6 +1,6 @@
 export const BLOOD_GROUP = "Blood Group";
 
-export const BLOOD_CELLS = "Blood Celss";
+export const BLOOD_CELLS = "Blood Cells";
 
 // export const BLOOD_GROUP = ''
 
