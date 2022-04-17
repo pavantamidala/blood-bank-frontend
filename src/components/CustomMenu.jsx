@@ -118,6 +118,7 @@ export default function BasicMenu({
             <MenuItem key={i}>
               <div className="custom-box">
                 <span> {memoizedMapper(obj.name,filterObj.name)} </span>
+                {/* <span> {obj.name} </span> */}
                 <Checkbox
                   checked={obj.checked}
                   onChange={(e) => handleChange(e, filterObj, obj)}
