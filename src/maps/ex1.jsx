@@ -177,6 +177,19 @@ function MapEx({
                         <div className="age">
                           Age: <b> {obj.dob} </b>
                         </div>
+                        {
+                          obj.phoneNumber &&  <div className="age">
+                          Phone: <b> {obj.phoneNumber?obj.phoneNumber:''} </b>
+                        </div>
+                        }
+
+                        {obj.aadhar && 
+                          <div className="age">
+                          Aadhar: <b> {obj.aadhar?obj.aadhar:''} </b>
+                        </div>
+                        }
+                       
+
                         <div className="address">
                           Address: <b> {obj.formatted_address} </b>
                         </div>

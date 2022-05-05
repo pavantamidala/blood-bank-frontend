@@ -133,17 +133,22 @@ setAadhar(value)
           },
           data: JSON.stringify(payload),
         };
-    
-        axios
-          .put("/user-details", req)
-          .then((res) => {
-            console.log(res);
-            handleCancel();
-          })
-          .catch((err) => {
-            console.log(err);
-            handleCancel();
-          });
+    if(!res.data){
+      setShowError(false)
+      axios
+      .put("/user-details", req)
+      .then((res) => {
+        console.log(res);
+        handleCancel();
+      })
+      .catch((err) => {
+        console.log(err);
+        handleCancel();
+      });
+    }else{
+      setShowError(true)
+    }
+      
     
         console.log(payload);
       })
@@ -291,13 +296,18 @@ setAadhar(value)
           />
         </div>
 
-        <div className="blood-form">
+        <div style={{display: 'grid',
+    gridTemplateColumns: "1fr 2fr"}} className="blood-form">
           <Form.Field> Aadhar Number : </Form.Field>{" "}
           <Input
             placeholder="Aadhar Number..."
             value={aadhar}
             onChange={aadharChange}
           />
+          {
+            showError &&          <div style={{color:'red',    gridColumnEnd: '-1'}} className="error"> Aadhar Number already exists </div>
+          }
+
         </div>
       </div>
       <div className="submit-btn">
