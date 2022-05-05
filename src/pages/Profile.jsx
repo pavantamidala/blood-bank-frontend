@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { Dropdown } from "semantic-ui-react";
-import { Form, Radio, Dropdown } from "semantic-ui-react";
+import { Form, Radio, Dropdown, Input } from "semantic-ui-react";
 import Autocomplete from "react-google-autocomplete";
 import "../styles/Profile.css";
 // import {
@@ -25,12 +25,15 @@ let friendOptions = [
     // },
   },
 ];
-function Profile({handleCancel}) {
+function Profile({ handleCancel }) {
   const [donatedBloodCelss, setDonatedBloodCells] = useState(null);
   const [donatedBlood, setDonatedBlood] = useState(null);
   const [gender, setgenderChange] = useState(null);
   const [dob, setDob] = useState("");
   const [userDetails, setUserDetails] = useState({});
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [aadhar, setAadhar] = useState("");
+  const [showError,setShowError] = useState(false)
   const [address, setAddress] = useState({
     formatted_address: "",
     place_id: "",
@@ -76,37 +79,78 @@ function Profile({handleCancel}) {
   function bloodGroupChange(e, { value }) {
     setBloodGroup(value);
   }
+  function phoneNumberChange(e, { value }) {
+    setPhoneNumber(value)
+  }
+  function aadharChange(e, { value }) {
+setAadhar(value)
+
+  }
   function getValues() {
-    let payload = {
-      donatedBloodCelss,
-      donatedBlood,
-      gender,
-      dob,
-      address,
-      bloodGroup,
-      id: userDetails.id,
+
+
+    let aadharPayload = {
+      // donatedBloodCelss,
+      // donatedBlood,
+      // gender,
+      // dob,
+      // address,
+      // bloodGroup,
+      // phoneNumber,
+      aadhar,
+      // id: userDetails.id,
     };
-    let req = {
+    let aadhaReq = {
       method: "PUT",
-      url: "/user-details",
+      url: "/aadhar-validate",
       headers: {
         "Content-Type": "application/json",
       },
-      data: JSON.stringify(payload),
+      data: JSON.stringify(aadharPayload),
     };
 
     axios
-      .put("/user-details", req)
+      .put("/aadhar-validate", aadhaReq)
       .then((res) => {
         console.log(res);
-        handleCancel()
+        // handleCancel();
+        let payload = {
+          donatedBloodCelss,
+          donatedBlood,
+          gender,
+          dob,
+          address,
+          bloodGroup,
+          phoneNumber,
+          aadhar,
+          id: userDetails.id,
+        };
+        let req = {
+          method: "PUT",
+          url: "/user-details",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify(payload),
+        };
+    
+        axios
+          .put("/user-details", req)
+          .then((res) => {
+            console.log(res);
+            handleCancel();
+          })
+          .catch((err) => {
+            console.log(err);
+            handleCancel();
+          });
+    
+        console.log(payload);
       })
       .catch((err) => {
         console.log(err);
-        handleCancel()
+        // handleCancel();
       });
-
-    console.log(payload);
   }
 
   return (
@@ -217,9 +261,9 @@ function Profile({handleCancel}) {
         <div className="blood-form">
           <Form.Field> Address : </Form.Field>
           <Autocomplete
-            apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+            apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
             onPlaceSelected={(place) => {
-              console.log(place)
+              console.log(place);
               setAddress((val) => {
                 return {
                   formatted_address: place.formatted_address,
@@ -234,6 +278,26 @@ function Profile({handleCancel}) {
         <div className="blood-form">
           <Form.Field> Date of Birth : </Form.Field>{" "}
           <DatePicker onChange={dobChange} />
+        </div>
+
+        <div className="blood-form">
+          <Form.Field> Phone Number : </Form.Field>{" "}
+          <Input
+          type="number"
+
+            placeholder="Phone Number..."
+            value={phoneNumber}
+            onChange={phoneNumberChange}
+          />
+        </div>
+
+        <div className="blood-form">
+          <Form.Field> Aadhar Number : </Form.Field>{" "}
+          <Input
+            placeholder="Aadhar Number..."
+            value={aadhar}
+            onChange={aadharChange}
+          />
         </div>
       </div>
       <div className="submit-btn">

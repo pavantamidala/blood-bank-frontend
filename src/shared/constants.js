@@ -12,6 +12,9 @@ export const GENDER = "Gender";
 
 export const LOCATION = "Location";
 
+export let AADHAR = 'Aadhar'
+export let PHONE_NUMBER = 'Phone Number'
+
 // export const BLOOD_GROUP
 
 // export const BLOOD_GROUP
