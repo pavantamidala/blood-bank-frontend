@@ -3,22 +3,33 @@ import BasicMenu from "../components/CustomMenu";
 import Filters from "../components/Filters";
 import Map from "../components/Map";
 // import Autocomplete from "react-google-autocomplete";
-import { checkAndAddDifference, createObjWithChecked } from "../shared/CommonMethods";
+import {
+  checkAndAddDifference,
+  createObjWithChecked,
+} from "../shared/CommonMethods";
 import { BASE_DATA } from "../shared/dataStore/config";
 import queryString from "query-string";
 import Profile from "./Profile";
-import MapEx from '../maps/ex1'
+import MapEx from "../maps/ex1";
 import { Modal, Button } from "antd";
-import { Avatar, Image } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import '../styles/Main.css'
+import { Avatar, Image } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import "../styles/Main.css";
 import axios from "axios";
 // import {MyMapWithAutocomplete} from "../components/autocomplete";
 function Main() {
   const [filtersData, setFiltersData] = useState(BASE_DATA.FILTERS_DATA);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [mapsData,setMapsData] = useState([])
-  
+  const [mapsData, setMapsData] = useState([]);
+  const [myLocationAddress, setMyLocationAddress] = React.useState({
+    address: "",
+    distance: "",
+    duration: "",
+    mode: "",
+  });
+
+  const [destination, setDestination] = React.useState("");
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -31,19 +42,22 @@ function Main() {
     setIsModalVisible(false);
   };
   useEffect(() => {
-    axios.get('get-filters').then((res)=>{
-      console.log(res)
-      let filters  = JSON.parse(res.data)
-      let newArr = filtersData.map((obj)=>{
-        obj.filters =  filters[obj.name]
-        obj.filters = createObjWithChecked(obj.filters);
-        return obj 
+    axios
+      .get("get-filters")
+      .then((res) => {
+        console.log(res);
+        let filters = JSON.parse(res.data);
+        let newArr = filtersData.map((obj) => {
+          obj.filters = filters[obj.name];
+          obj.filters = createObjWithChecked(obj.filters);
+          return obj;
+        });
+        // console.log(filtersData)
+        setFiltersData(newArr);
       })
-      // console.log(filtersData)
-      setFiltersData(newArr)
-    }).catch((err)=>{
-      console.log(err)
-    })
+      .catch((err) => {
+        console.log(err);
+      });
     // let data = filtersData.map((obj) => {
     //   obj.filters = ["hello", "hi"];
     //   // checkAndAddDifference();
@@ -60,13 +74,16 @@ function Main() {
   }, []);
 
   return (
-    <div className="overallWrapper" >
+    <div className="overallWrapper">
       {/* <Profile /> */}
       <div className="heading">
-    <h3 className="title">
-      Blood Bank 
-    </h3>
-      <Avatar className="avatar" onClick={showModal} style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        <h3 className="title">Blood Bank</h3>
+        <Avatar
+          className="avatar"
+          onClick={showModal}
+          style={{ backgroundColor: "#87d068" }}
+          icon={<UserOutlined />}
+        />
       </div>
       {/* <Button type="primary" >
         Profile
@@ -81,33 +98,53 @@ function Main() {
       >
         {isModalVisible && <Profile handleCancel={handleCancel} />}
       </Modal>
-      <Filters setMapsData={setMapsData} filtersData={filtersData} setFiltersData={setFiltersData} />
+      <Filters
+        setMapsData={setMapsData}
+        filtersData={filtersData}
+        setFiltersData={setFiltersData}
+      />
       {/* {!isModalVisible && <Map />} */}
       {/* <Map /> */}
-<MapEx setMapsData={setMapsData} mapsData={mapsData} />
-{/* <img src="https://lh3.googleusercontent.com/a/AATXAJzrUeKlYL-M91GlSndYVzPx7CpK4Nh5ejr2xKZquw=s96-c" alt="" /> */}
-      {/* <CustomMenu /> */}
-      {/* <BasicMenu /> */}
-      {/* <Autocomplete
-        style={{ display: "none" }}
-        apiKey={"AIzaSyDDdcrX0rUGZi9kplSBZ7hA-4c0Zjl5E0s"}
-        onPlaceSelected={(place) => {
-          // setAddress((val) => {
-          //   return {
-          //     formatted_address: place.formatted_address,
-          //     place_id: place.place_id,
-          //     lat: place.geometry.location.lat(),
-          //     lng: place.geometry.location.lng(),
-          //   };
-          // });
-        }}
-      /> */}
+      {myLocationAddress.address &&
+      destination &&
+      myLocationAddress.mode &&
+      myLocationAddress.distance &&
+      myLocationAddress.duration ? (
+        <div style={{ justifyContent: "flex-end",display:'grid',gridTemplateColumns:'auto auto',gridColumnGap:'20px' }} className="mapWrapper">
+          <div>
+            {`${myLocationAddress.address.split(",")[0]} ` }  <b>To</b> {`  ${
+              destination.split(",")[0]
+            }`}
+          </div>
+          {/* <br /> */}
+          <div>
+            <span>
+              {" "}
+              Distance: <b>{myLocationAddress.distance.text}</b>{" "}
+            </span>
+            <span>
+              {" "}
+              Time: <b>{myLocationAddress.duration.text}</b>{" "}
+            </span>
+          </div>
+          {/* {JSON.stringify(myLocationAddress.distance)} */}
+        </div>
+      ) : (
+        ""
+      )}
+      <MapEx
+        myLocationAddress={myLocationAddress}
+        setMyLocationAddress={setMyLocationAddress}
+        destination={destination}
+        setDestination={setDestination}
+        setMapsData={setMapsData}
+        mapsData={mapsData}
+      />
     </div>
   );
 }
 
 export default Main;
-
 
 // userName
 // :

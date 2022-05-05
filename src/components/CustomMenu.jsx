@@ -44,7 +44,7 @@ export default function BasicMenu({
   const handleClose = () => {
     setAnchorEl(null);
     applyFilters();
-    console.log(filtersData);
+    // console.log(filtersData);
     getMapData(filtersData, success, failure);
   };
   function applyFilters() {
@@ -56,6 +56,7 @@ export default function BasicMenu({
   }
 
   function handleChange(e, val, o) {
+    console.log('hi')
     let index;
 
     let ans = filtersData.filter((obj, i) => {
